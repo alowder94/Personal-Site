@@ -5,8 +5,8 @@ import Layout from '../components/Layout'
 function Contact_Me() {
   return (
     <Layout>
-      <h1 className="text-center display-5">Contact Me</h1>
-      <Container>
+      <h1 className="text-center display-5 mb-3">Contact Me</h1>
+      <Container className="p-5 border">
       <Form>
         <Row>
           <Col xs={4}>
