@@ -17,7 +17,7 @@ function index() {
         </Row>
         <h1 className="text-center display-3 mb-3">Austin Lowder - Software Engineer</h1>
         {/* TODO: Create new, professional facebook (keep separate from personal - maybe post some tech related things on this one to stay active in the community?) for this link, create twitter to link to here as well. Revise Linkdin and link here as well? - same with links in Navbar */}
-        <p className="text-center lead mb-3"><a href="http://www.facebook.com" className="link-dark">Facebook</a> | <a href="http://www.github.com" className="link-dark">Github</a></p>
+        <p className="text-center lead mb-3"><a href="http://www.facebook.com" className="link-dark">Facebook</a> | <a href="https://github.com/alowder94" className="link-dark">Github</a></p>
         <Card className="text-center bg-light mb-3">
           <Card.Header className="display-5 py-3 bg-light">Welcome to my site</Card.Header>
           <Card.Subtitle className="display-6 pt-3">About Me</Card.Subtitle>
