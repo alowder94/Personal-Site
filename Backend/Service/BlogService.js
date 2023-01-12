@@ -20,6 +20,15 @@ function getAllBlogs(req, res) {
     res.end(JSON.stringify(blogList));
 }
 
+function getBlogById (req, res) {
+    const id = req.params.id;
+    //TODO: query db for blog matching this id
+    const blog = JSON.stringify(blog1); //Instead of blog 1 - pass data from previous call here. May not need to stringify depending on how the respone is formatted
+    res.statusCode = 200;
+    res.end(JSON.stringify(blog)); 
+}
+
 module.exports = {
-    getAllBlogs
+    getAllBlogs,
+    getBlogById
 }
