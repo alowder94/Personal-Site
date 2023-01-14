@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react'
-import { Modal } from 'react-bootstrap';
 import BlogSnipet from '../components/BlogSnipet'
+import BlogModal from '../components/BlogModal';
 import Layout from '../components/Layout'
 
 function Blogs() {
@@ -23,14 +23,13 @@ function Blogs() {
     event.preventDefault();
     if(showModal == false) {
       let id = event.target.getAttribute("blog");
-      console.log(id);
       //Fetch the specified blog here - update selected blog - this will hold the entire blog object
       let response = await fetch(`http://localhost:3001/blogs/${id}`)
         .then(res => res.json());
         selectBlog(JSON.parse(response));
       toggleModal(true);
     } else {
-      console.log("Setting toggleModal to false");
+      // alert("Error - corrupted state. Please refresh page")
       toggleModal(false);
     }
   }
@@ -38,13 +37,7 @@ function Blogs() {
   return (
     <Layout>
       {blogList.map(((blog) =><BlogSnipet handleclick={blogClickListener} blogSnipet={blog} key={blog.id}/>))}
-
-      <Modal show={showModal} onHide={handleClose} >
-        <Modal.Header closeButton>
-          <Modal.Title>{selectedBlog.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{selectedBlog.body}</Modal.Body>
-      </Modal>
+      <BlogModal blog={selectedBlog} showModal={showModal} handleClose={handleClose} />
     </Layout>
     )
 }
