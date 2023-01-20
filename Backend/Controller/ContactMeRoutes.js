@@ -1,28 +1,15 @@
-// const express = require('express');
-// const nodemailer = require('nodemailer');
-// const router = express.Router();
+const express = require('express');
 
-// //#####################################################################################################
-// //This is just the connection object - this code is not ready for production. Need to find a way to externalize my creds here
-// const stmpConfig = {
-//     service : 'gmail',
-//     auth: {
-//       user: "", //Email address goes here
-//       pass: "", //Password for this email goes here - for gmail needs to be application specific password
-//     },
-//   }
-// //#####################################################################################################
+const service = require('../Service/ContactMeService')
 
-// const transporter = nodemailer.createTransport(stmpConfig)
+const router = express.Router();
 
+//Prepend all routes with contact-me
 
-// transporter.verify((error, success) => {
-//     if (error) {
-//         console.log(error);
-//     } else {
-//         console.log("Successful");
-//     }
-//     }
-// )
+//Verifies that the email server is up
+router.get('/verify', service.verify);
 
-// module.exports = router;
+//Sends email - requires email in request body
+router.post('/', service.sendEmail);
+
+module.exports = router;

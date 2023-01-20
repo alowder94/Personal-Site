@@ -17,18 +17,20 @@ function Project({props}) {
     const projectBlogs = [blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8, blog9] //TODO: Run function here to retrun relevant blog posts depending on blog tags - store as a list in projectBlogs variable
 
     return (
-    <Accordion.Item eventKey={props.projectName}>
-        <Accordion.Header><p className='lead fw-bold m-0 p-1 '>{props.projectName}</p></Accordion.Header>
-        <Accordion.Body className="p-0">
-            <p className="lead p-2 text-center">{props.projectDescription}</p>
-            <Accordion flush>
-                <Accordion.Header className="p-3">Related Blogs</Accordion.Header>
-                <Accordion.Body className="text-center">
-                {projectBlogs.map(blog => <BlogSnipet blogSnipet={blog} />)}
-                </Accordion.Body>
-            </Accordion>
-        </Accordion.Body>
-    </Accordion.Item>
+    <Accordion>
+        <Accordion.Item eventKey={props.projectName}>
+            <Accordion.Header><p className='lead fw-bold m-0 p-1 '>{props.projectName}</p></Accordion.Header>
+            <Accordion.Body className="p-0">
+                <p className="lead p-2 text-center">{props.projectDescription}</p>
+                <Accordion flush>
+                    <Accordion.Header className="p-3">Related Blogs</Accordion.Header>
+                    <Accordion.Body className="text-center">
+                    {projectBlogs.map(blog => <BlogSnipet blogSnipet={blog} />)}
+                    </Accordion.Body>
+                </Accordion>
+            </Accordion.Body>
+        </Accordion.Item>
+    </Accordion>
     )
 }
 

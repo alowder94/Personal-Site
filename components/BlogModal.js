@@ -9,7 +9,7 @@ function BlogModal({blog, showModal, handleClose}) {
                 <Modal.Title className={"text-light text-center"}>{blog.title}</Modal.Title>
             </div>
         </Modal.Header>
-        <Modal.Body className={"text-center"} style={{"height" : "300px", "overflow-y": "scroll"}}>{blog.body}</Modal.Body>
+        <Modal.Body className={"text-center"} style={{"height" : "300px", "overflowY": "scroll"}}>{blog.body}</Modal.Body>
     </Modal>
   )
 }

@@ -1,6 +1,7 @@
 const express = require('express');
-const router = express.Router();
 const service = require('../Service/BlogService')
+
+const router = express.Router();
 
 //All routes are prepended with "/blogs"
 

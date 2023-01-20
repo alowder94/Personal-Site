@@ -5,16 +5,17 @@ import Layout from '../components/Layout'
 
 function Blogs() {
   const [blogList, setBlogList] = useState([]); 
-  //Grab all blogs and set state equal to returned blogs
-  useEffect(() => {fetch("http://localhost:3001/blogs")  
-                    .then(res => res.json())
-                    .then(data => setBlogList(data))
-                    .catch((err) => console.log(err))},
-                    [])
 
   //Modal functionality
    const [showModal, toggleModal] = useState(false);
    const [selectedBlog, selectBlog] = useState("");
+
+   //Grab all blogs and set state equal to returned blogs
+  useEffect(() => {fetch("http://localhost:3001/blogs")
+                    .then(res => res.json())
+                    .then(data => setBlogList(data))
+                    .catch((err) => console.log(err))},
+                    [])
   
   const handleClose = () => toggleModal(false);
 
@@ -23,10 +24,12 @@ function Blogs() {
     event.preventDefault();
     if(showModal == false) {
       let id = event.target.getAttribute("blog");
+
       //Fetch the specified blog here - update selected blog - this will hold the entire blog object
       let response = await fetch(`http://localhost:3001/blogs/${id}`)
         .then(res => res.json());
         selectBlog(JSON.parse(response));
+
       toggleModal(true);
     } else {
       // alert("Error - corrupted state. Please refresh page")
