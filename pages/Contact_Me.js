@@ -1,11 +1,37 @@
-import React from 'react'
-import { Form, Container, Row, Col, Button } from 'react-bootstrap'
+import { React, useEffect, useState, useMemo } from 'react'
+import { Form, Container, Row, Col, Button, Alert } from 'react-bootstrap'
 import Layout from '../components/Layout'
 
 function Contact_Me() {
 
-  async function submitForm() {
+  const [emailProviderActive, setEmailProviderActive] = useState(true)
+
+  function checkEmailProvider() {
+    fetch("http://localhost:3001/contact-me/verify")
+      .then(res => {
+      console.log(res)
+      if (res.status === 200) {
+        setEmailProviderActive(true)
+      } else {
+        setEmailProviderActive(false)
+      }
+    })
+    .catch(err => {
+      setEmailProviderActive(false)
+    })
+}
+
+  useEffect(() => checkEmailProvider() , [])
+
+
+  async function submitForm(event) {
     event.preventDefault()
+
+    checkEmailProvider()
+    
+    if(emailProviderActive == false) {
+      alert("Email Server is down at this time - please try again later!")
+    }
 
     let firstName = document.getElementById("firstName");
     let lastName = document.getElementById("lastName");
@@ -41,42 +67,50 @@ function Contact_Me() {
     }
   }
 
-  return (
-    <Layout>
-      <h1 className="text-center display-5 mb-3">Contact Me</h1>
-      <Container className="p-5 border">
-      <Form onSubmit={submitForm}>
-        <Row>
-          <Col xs={4}>
-            <Form.Group className="m-2" controlId="firstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control type="input" placeholder="First name" />
-            </Form.Group>
-          </Col>
-          <Col xs={4}>
-            <Form.Group className="m-2" controlId="lastName">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control type="input" placeholder="Last name" />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Form.Group className="m-2" controlId="subject">
-          <Form.Label>Subject</Form.Label>
-          <Form.Control type="input" placeholder="Subject" />
-        </Form.Group>
-        <Form.Group className="m-2" controlId="body">
-          <Form.Label>Email Body</Form.Label>
-          <Form.Control as="textarea" rows={8} placeholder="Email Body - include contact information if you would like a follow-up" />
-        </Form.Group>
-        <Row>
-          <Col className="text-end">
-            <Button type="submit" variant="dark" className="me-2">Submit</Button>
-          </Col>
-        </Row>
-      </Form>
-      </Container>
-    </Layout>
+  if(emailProviderActive) {
+    return (
+      <Layout>
+        <h1 className="text-center display-5 mb-3">Contact Me</h1>
+        <Container className="p-5 border">
+        <Form onSubmit={submitForm}>
+          <Row>
+            <Col xs={4}>
+              <Form.Group className="m-2" controlId="firstName">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control type="input" placeholder="First name" />
+              </Form.Group>
+            </Col>
+            <Col xs={4}>
+              <Form.Group className="m-2" controlId="lastName">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control type="input" placeholder="Last name" />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Form.Group className="m-2" controlId="subject">
+            <Form.Label>Subject</Form.Label>
+            <Form.Control type="input" placeholder="Subject" />
+          </Form.Group>
+          <Form.Group className="m-2" controlId="body">
+            <Form.Label>Email Body</Form.Label>
+            <Form.Control as="textarea" rows={8} placeholder="Email Body - include contact information if you would like a follow-up" />
+          </Form.Group>
+          <Row>
+            <Col className="text-end">
+              <Button type="submit" variant="dark" className="me-2">Submit</Button>
+            </Col>
+          </Row>
+        </Form>
+        </Container>
+      </Layout>
   )
+    } else {
+      return (
+        <Layout>
+          <h3 className="text-center">Email Server is down - please try again later!</h3>
+        </Layout>
+      )
+    }
 }
 
 export default Contact_Me

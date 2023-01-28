@@ -1,5 +1,4 @@
 import React from 'react'
-import { Accordion } from 'react-bootstrap'
 import Layout from '../components/Layout'
 import Project from '../components/Project'
 
