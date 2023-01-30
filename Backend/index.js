@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const blogRoutes = require('./Controller/BlogRoutes');
 const ContactMeRoutes = require('./Controller/ContactMeRoutes')
+const ProjectRoutes = require('./Controller/ProjectRoutes')
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
@@ -13,3 +14,4 @@ app.listen(3001);
 
 app.use('/blogs', blogRoutes);
 app.use('/contact-me', ContactMeRoutes)
+app.use('/projects', ProjectRoutes);
