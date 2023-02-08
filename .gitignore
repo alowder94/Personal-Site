@@ -38,3 +38,6 @@ next-env.d.ts
 #Package files
 package-lock.json
 package.json
+
+#Config
+default.json

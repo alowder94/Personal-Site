@@ -1,11 +1,28 @@
-class Blog {
-    constructor(id, title, snipet, body) {
-        this.id = id;
-        this.title = title
-        this.snipet = snipet
-        this.body = body
-    }
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const blogSchema = new Schema(
+    {
+        id: {
+            type: String,
+            required: true
+        },
+        title: {
+            type: String,
+            required: true
+        },
+        snipet: {
+            type: String,
+            required: true
+        },
+        body: {
+            type: String,
+            required: true
+        }
 }
+);
+
+const Blog = mongoose.model('Blog', blogSchema)
 
 module.exports = {
     Blog

@@ -13,7 +13,7 @@ function BlogSnipet({blogSnipet, handleclick}) { //update prop name - we are pas
                     <p className="lead">{blogSnipet.snipet}</p>
                 </Col>
                 <Col >
-                    <Button blog={blogSnipet.id} onClick={(e) => handleclick(e)} className="btn-secondary">Show</Button>
+                    <Button blog={blogSnipet._id} onClick={(e) => handleclick(e)} className="btn-secondary">Show</Button>
                 </Col>
             </Row>
         </Container>

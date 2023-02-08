@@ -32,14 +32,14 @@ function Blogs() {
 
       toggleModal(true);
     } else {
-      // alert("Error - corrupted state. Please refresh page")
+      alert("Error - corrupted state. Please refresh page")
       toggleModal(false);
     }
   }
   
   return (
     <Layout>
-      {blogList.map(((blog) =><BlogSnipet handleclick={blogClickListener} blogSnipet={blog} key={blog.id}/>))}
+      {blogList.map(((blog) =><BlogSnipet handleclick={blogClickListener} blogSnipet={blog} key={blog._id}/>))}
       <BlogModal blog={selectedBlog} showModal={showModal} handleClose={handleClose} />
     </Layout>
     )
