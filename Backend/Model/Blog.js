@@ -18,6 +18,10 @@ const blogSchema = new Schema(
         body: {
             type: String,
             required: true
+        },
+        tags: {
+            type: Array,
+            required: true
         }
 }
 );

@@ -1,7 +1,25 @@
-class Project {
-    constructor(name, description, relevantBlogs) {
-        this.projectName = name;
-        this.projectDescription = description;
-        this.relevantBlogs = relevantBlogs;
+mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
+const projectSchema = new Schema(
+    {
+        name: {
+            type: String,
+            required: true
+        },
+        projectDescription: {
+            type: String,
+            required: true
+        },
+        tags: {
+            type: Array,
+            required: true
+        }
     }
+)
+
+const Project = mongoose.model('Project', projectSchema)
+
+module.exports = {
+    Project
 }

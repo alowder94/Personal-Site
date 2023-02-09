@@ -16,7 +16,7 @@ function Projects() {
 
   return (
     <Layout>
-          {projects.map(project => <Project props={project} />)}
+          {projects.map(project => <Project props={project} key={project.id}/>)}
     </Layout>
   )
 }

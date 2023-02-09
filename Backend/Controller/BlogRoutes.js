@@ -8,6 +8,8 @@ const router = express.Router();
 //This returns all blogs - used by the "Blogs" page
 router.get('/', service.getAllBlogs)
 
+router.get('/tags', service.getBlogsByTags)
+
 // //This returns a single blog based on the id - this will be used to display a particular blog on the blog/id page
 router.get('/:id', service.getBlogById)
 
