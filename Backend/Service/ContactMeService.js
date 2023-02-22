@@ -22,7 +22,6 @@ function verify(req, res) {
             res.statusCode = 500;
             res.end("False");
         } else {
-            console.log("Successful");
             res.statusCode = 200;
             res.end("True");
         }

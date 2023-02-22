@@ -28,6 +28,11 @@ function getProjectById(req, res) {
         .catch(err => console.log(err))
 }
 
+function saveNewProject(req, res) {
+    const newProject = req.body
+    console.log(req.body)
+}
+
 module.exports = {
     getAllProjects,
     getProjectById

@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import BlogSnipet from '../components/BlogSnipet'
-import BlogModal from '../components/BlogModal';
+import BlogModal from '../components/BlogModal.tsx';
 import Layout from '../components/Layout'
 
 function Blogs() {
@@ -23,7 +23,7 @@ function Blogs() {
   async function blogClickListener(event) {
     event.preventDefault();
     if(showModal == false) {
-      let id = event.target.getAttribute("blog");
+      let id = event.target.getAttribute("value");
 
       //Fetch the specified blog here - update selected blog - this will hold the entire blog object
       let response = await fetch(`http://localhost:3001/blogs/${id}`)
@@ -39,7 +39,7 @@ function Blogs() {
   
   return (
     <Layout>
-      {blogList.map(((blog) =><BlogSnipet handleclick={blogClickListener} blogSnipet={blog} key={blog._id}/>))}
+      {blogList.map(((blog) =><BlogSnipet handleClick={blogClickListener} blogSnipet={blog} key={blog._id}/>))}
       <BlogModal blog={selectedBlog} showModal={showModal} handleClose={handleClose} />
     </Layout>
     )

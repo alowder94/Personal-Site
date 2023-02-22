@@ -1,6 +1,6 @@
 import { React, useEffect, useState, useMemo } from 'react'
 import { Form, Container, Row, Col, Button, Alert } from 'react-bootstrap'
-import Layout from '../components/Layout'
+import Layout from '../src/components/Layout'
 
 function Contact_Me() {
 
@@ -9,7 +9,6 @@ function Contact_Me() {
   function checkEmailProvider() {
     fetch("http://localhost:3001/contact-me/verify")
       .then(res => {
-      console.log(res)
       if (res.status === 200) {
         setEmailProviderActive(true)
       } else {

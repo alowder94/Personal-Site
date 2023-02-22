@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react'
-import Layout from '../components/Layout'
-import Project from '../components/Project'
+import Layout from '../src/components/Layout'
+import Project from '../src/components/Project'
 
 function Projects() {
   const [projects, setProjects] = useState([])
@@ -16,7 +16,7 @@ function Projects() {
 
   return (
     <Layout>
-          {projects.map(project => <Project props={project} key={project.id}/>)}
+          {projects.map(project => <Project props={project} key={project._id}/>)}
     </Layout>
   )
 }

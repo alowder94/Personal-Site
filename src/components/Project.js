@@ -3,6 +3,8 @@ import { Accordion } from 'react-bootstrap'
 import BlogSnipet from './BlogSnipet'
 import BlogModal from './BlogModal'
 
+
+
 function Project({props}) {
 
     const [projectBlogs, setProjectBlogs] = useState([])
@@ -38,7 +40,7 @@ function Project({props}) {
     }
 
     return (
-    <Accordion key={props.id}>
+    <Accordion key={props._id}>
         <Accordion.Item eventKey={props.name}>
             <Accordion.Header><p className='lead fw-bold m-0 p-1 '>{props.name}</p></Accordion.Header>
             <Accordion.Body className="p-0">
