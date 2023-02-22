@@ -1,14 +1,15 @@
-import { React, useState, useEffect } from 'react'
+import { useState, useEffect, ReactComponentElement } from 'react'
 import BlogSnipet from '../components/BlogSnipet'
-import BlogModal from '../components/BlogModal.tsx';
+import BlogModal from '../components/BlogModal';
 import Layout from '../components/Layout'
+import { Blog } from '../types/Blog';
 
 function Blogs() {
-  const [blogList, setBlogList] = useState([]); 
+  const [blogList, setBlogList] = useState<Blog[]>([]); 
 
   //Modal functionality
-   const [showModal, toggleModal] = useState(false);
-   const [selectedBlog, selectBlog] = useState("");
+   const [showModal, toggleModal] = useState<boolean>(false);
+   const [selectedBlog, selectBlog] = useState<Blog>({} as Blog);
 
    //Grab all blogs and set state equal to returned blogs
   useEffect(() => {fetch("http://localhost:3001/blogs")
@@ -20,7 +21,7 @@ function Blogs() {
   const handleClose = () => toggleModal(false);
 
   //TODO: Resize the modal - apply some kind of styling to it
-  async function blogClickListener(event) {
+  async function blogClickListener(event: any) {
     event.preventDefault();
     if(showModal == false) {
       let id = event.target.getAttribute("value");

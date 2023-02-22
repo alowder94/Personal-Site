@@ -3,9 +3,9 @@ import { Modal } from 'react-bootstrap'
 import { Blog } from '../types/Blog'
 
 type BlogModalProps = {
-  blog:Blog
+  blog: Blog
   showModal: boolean
-  handleClose: () => void
+  handleClose: ()  => void
 }
 
 function BlogModal(props: BlogModalProps) {

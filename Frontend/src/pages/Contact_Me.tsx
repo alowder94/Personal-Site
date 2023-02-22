@@ -1,10 +1,10 @@
-import { React, useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, FormEventHandler } from 'react'
 import { Form, Container, Row, Col, Button, Alert } from 'react-bootstrap'
-import Layout from '../src/components/Layout'
+import Layout from '../components/Layout'
 
 function Contact_Me() {
 
-  const [emailProviderActive, setEmailProviderActive] = useState(true)
+  const [emailProviderActive, setEmailProviderActive] = useState<boolean>(true)
 
   function checkEmailProvider() {
     fetch("http://localhost:3001/contact-me/verify")
@@ -23,7 +23,7 @@ function Contact_Me() {
   useEffect(() => checkEmailProvider() , [])
 
 
-  async function submitForm(event) {
+  async function submitForm (event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault()
 
     checkEmailProvider()
@@ -32,10 +32,10 @@ function Contact_Me() {
       alert("Email Server is down at this time - please try again later!")
     }
 
-    let firstName = document.getElementById("firstName");
-    let lastName = document.getElementById("lastName");
-    let subject = document.getElementById("subject");
-    let body = document.getElementById("body");
+    let firstName = document.getElementById("firstName") as HTMLInputElement;
+    let lastName = document.getElementById("lastName") as HTMLInputElement;
+    let subject = document.getElementById("subject") as HTMLInputElement;
+    let body = document.getElementById("body") as HTMLInputElement;
 
     let bodyString = `From: ${firstName.value} ${lastName.value}
     
@@ -71,7 +71,7 @@ function Contact_Me() {
       <Layout>
         <h1 className="text-center display-5 mb-3">Contact Me</h1>
         <Container className="p-5 border">
-        <Form onSubmit={submitForm}>
+        <Form>
           <Row>
             <Col xs={4}>
               <Form.Group className="m-2" controlId="firstName">
@@ -96,7 +96,7 @@ function Contact_Me() {
           </Form.Group>
           <Row>
             <Col className="text-end">
-              <Button type="submit" variant="dark" className="me-2">Submit</Button>
+              <Button onClick={submitForm} variant="dark" className="me-2">Submit</Button>
             </Col>
           </Row>
         </Form>
