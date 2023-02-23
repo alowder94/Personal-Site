@@ -1,9 +1,9 @@
-const nodemailer = require('nodemailer');
-const config = require('config');
+import nodemailer from 'nodemailer'
+import {Request, Response} from 'express'
 
 //Pull email username and password from config server
-const username = config.get('username');
-const password = config.get('password');
+const username = process.env.USERNAME
+const password = process.env.PASSWORD
 
 //Test code - uses mailtrap to send emails to a dummy mailbox
 var transport = nodemailer.createTransport({
@@ -15,7 +15,7 @@ var transport = nodemailer.createTransport({
 }
 });
 
-function verify(req, res) {
+export function verify(req: Request, res: Response) {
     transport.verify((error, success) => {
         if (error) {
             console.log(error);
@@ -28,11 +28,11 @@ function verify(req, res) {
     })
 }
 
-function sendEmail(req, res) {
+export function sendEmail(req: Request, res: Response) {
 
     const requestBody = req.body;
 
-    message = {
+    const message = {
         from: "homepage",
         to: "austin.lowder.dev@mail.com",
         subject: "[Message from Homepage] " + requestBody.subject,
@@ -50,11 +50,6 @@ function sendEmail(req, res) {
             res.end("Message Sent!")
         }
     })
-}
-
-module.exports = {
-    verify,
-    sendEmail
 }
 
 // //#####################################################################################################

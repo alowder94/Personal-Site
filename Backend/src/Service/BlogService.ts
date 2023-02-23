@@ -1,16 +1,16 @@
-const config = require('config')
+import config from 'config'
+import mongoose from 'mongoose'
+import { Request, Response } from 'express'
+import { Blog } from "../Model/blog.js"
 
-const mongoose = require('mongoose')
-const { Blog } = require("../Model/blog")
-
-const dbUsername = config.get('dbUsername')
-const dbPassword = config.get('dbPassword')
+const dbUsername = process.env.dbUsername
+const dbPassword = process.env.dbPassword
 
 const DBURI = `mongodb+srv://${dbUsername}:${dbPassword}@homepagecluster.toe2cpr.mongodb.net/?retryWrites=true&w=majority`
 mongoose.connect(DBURI)
-    .catch(err => console.log(err))
+    .catch(err=> console.log(err))
 
-function getAllBlogs(req, res) {
+export function getAllBlogs(req: any, res: any) {
     Blog.find()
         .then(result => {
             res.status(200).end(JSON.stringify(result))
@@ -18,7 +18,7 @@ function getAllBlogs(req, res) {
         )
 }   
 
-function getBlogById (req, res) {
+export function getBlogById (req: Request, res: Response) {
     const id = req.params.id;
     Blog.findById(id)
         .then(result => {
@@ -28,8 +28,8 @@ function getBlogById (req, res) {
         })
 }
 
-async function getBlogsByTags (req, res) {
-    const tagsList = req.query.tags
+export async function getBlogsByTags (req: Request, res: Response) {
+    const tagsList = req.query.tags as string[] //TODO: should I implement some kind of typechecking here first?
     let allBlogsList = await Blog.find();
     let projectBlogs = []
 
@@ -43,10 +43,4 @@ async function getBlogsByTags (req, res) {
     }
 
     res.status(200).end(JSON.stringify(projectBlogs))
-}
-
-module.exports = {
-    getAllBlogs,
-    getBlogById,
-    getBlogsByTags
 }

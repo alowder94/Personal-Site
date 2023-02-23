@@ -1,13 +1,8 @@
-const express = require('express');
-const service = require('../Service/ProjectService')
-
+import express from 'express';
+import { getAllProjects } from '../Service/ProjectService.js';
 const router = express.Router();
-
 //All routes are prepended with "/projects"
-
 //This returns all projects - used by the "Projects" page
-router.get('/', service.getAllProjects)
-
+router.get('/', getAllProjects);
 //Will I end up needing getProjectById or addProject?
-
-module.exports = router;
+export const projectRoutes = router;
