@@ -8,10 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import mongoose from 'mongoose';
+import { config } from '../../config.js';
 import { Blog } from "../Model/blog.js";
-const dbUsername = process.env.dbUsername;
-const dbPassword = process.env.dbPassword;
-const DBURI = `mongodb+srv://${dbUsername}:${dbPassword}@homepagecluster.toe2cpr.mongodb.net/?retryWrites=true&w=majority`;
+const DBURI = `mongodb+srv://${config.DBUSERNAME}:${config.DBPASSWORD}@homepagecluster.toe2cpr.mongodb.net/?retryWrites=true&w=majority`;
 mongoose.connect(DBURI)
     .catch(err => console.log(err));
 export function getAllBlogs(req, res) {

@@ -1,14 +1,14 @@
 import {Request, Response} from 'express'
 import mongoose from 'mongoose'
+import { config } from '../../config.js'
 
 import {Project} from "../Model/project.js"
 
-const dbUsername = process.env.DBUSERNAME
-const dbPassword = process.env.DBPASSWORD
 
-console.log(process.env.DBUSERNAME + " | " + process.env.DBPASSWORD)
 
-const DBURI = `mongodb+srv://${dbUsername}:${dbPassword}@homepagecluster.toe2cpr.mongodb.net/?retryWrites=true&w=majority`
+console.log(config.DBUSERNAME + " | " + config.DBPASSWORD)
+
+const DBURI = `mongodb+srv://${config.DBUSERNAME}:${config.DBPASSWORD}@homepagecluster.toe2cpr.mongodb.net/?retryWrites=true&w=majority`
 mongoose.connect(DBURI)
     .catch(err => console.log(err))
 

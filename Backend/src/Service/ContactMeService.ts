@@ -1,16 +1,17 @@
 import nodemailer from 'nodemailer'
 import {Request, Response} from 'express'
 
+
 //Pull email username and password from config server
-const username = process.env.USERNAME
-const password = process.env.PASSWORD
+const username = "123"//ENVIRONMENT.USERNAME //process.env.USERNAME
+const password = "123"//ENVIRONMENT.PASSWORD //process.env.PASSWORD
 
 //Test code - uses mailtrap to send emails to a dummy mailbox
 var transport = nodemailer.createTransport({
     host: "smtp.mailtrap.io",
     port: 2525,
     auth: {
-        user: username,
+    user: username,
     pass: password
 }
 });
