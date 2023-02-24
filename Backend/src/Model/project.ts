@@ -19,4 +19,4 @@ const projectSchema = new Schema(
     }
 )
 
-export const Project = mongoose.model('Project', projectSchema)
+export const ProjectModel = mongoose.model('Project', projectSchema)

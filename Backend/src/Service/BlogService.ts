@@ -2,14 +2,15 @@ import mongoose from 'mongoose'
 import { config } from '../../config.js'
 
 import { Request, Response } from 'express'
-import { Blog } from "../Model/blog.js"
+import { BlogModel } from "../Model/blog.js"
+import { Blog } from '../Types/Blog.js'
 
 const DBURI = `mongodb+srv://${config.DBUSERNAME}:${config.DBPASSWORD}@homepagecluster.toe2cpr.mongodb.net/?retryWrites=true&w=majority`
 mongoose.connect(DBURI)
     .catch(err=> console.log(err))
 
 export function getAllBlogs(req: any, res: any) {
-    Blog.find()
+    BlogModel.find()
         .then(result => {
             res.status(200).end(JSON.stringify(result))
         }
@@ -18,7 +19,7 @@ export function getAllBlogs(req: any, res: any) {
 
 export function getBlogById (req: Request, res: Response) {
     const id = req.params.id;
-    Blog.findById(id)
+    BlogModel.findById(id)
         .then(result => {
             const blog = JSON.stringify(result);
             res.statusCode = 200;
@@ -28,7 +29,7 @@ export function getBlogById (req: Request, res: Response) {
 
 export async function getBlogsByTags (req: Request, res: Response) {
     const tagsList = req.query.tags as string[] //TODO: should I implement some kind of typechecking here first?
-    let allBlogsList = await Blog.find();
+    let allBlogsList: Blog[] = await BlogModel.find();
     let projectBlogs = []
 
     for(let tag of tagsList) {

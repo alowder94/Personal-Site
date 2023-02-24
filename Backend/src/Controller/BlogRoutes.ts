@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router } from 'express';
 import {getAllBlogs, getBlogsByTags, getBlogById} from '../Service/BlogService.js';
 
 
