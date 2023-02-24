@@ -21,10 +21,11 @@ function Blogs() {
   const handleClose = () => toggleModal(false);
 
   //TODO: Resize the modal - apply some kind of styling to it
-  async function blogClickListener(event: any) {
+  async function blogClickListener(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     if(showModal == false) {
-      let id = event.target.getAttribute("value");
+      const target = event.target as HTMLButtonElement
+      let id = target.getAttribute("value");
 
       //Fetch the specified blog here - update selected blog - this will hold the entire blog object
       let response = await fetch(`http://localhost:3001/blogs/${id}`)

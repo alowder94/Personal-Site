@@ -9,7 +9,7 @@ const DBURI = `mongodb+srv://${config.DBUSERNAME}:${config.DBPASSWORD}@homepagec
 mongoose.connect(DBURI)
     .catch(err=> console.log(err))
 
-export function getAllBlogs(req: any, res: any) {
+export function getAllBlogs(req: Request, res: Response) {
     BlogModel.find()
         .then(result => {
             res.status(200).end(JSON.stringify(result))

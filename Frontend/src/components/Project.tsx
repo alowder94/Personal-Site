@@ -27,10 +27,11 @@ function Project(props: ProjectProps) {
     const handleClose = () => toggleModal(false);
 
     //TODO: Resize the modal - apply some kind of styling to it
-    async function blogClickListener(event: any) { //TODO: What kind of element is this attached to? Why is the handler failing when using React.MouseEvent as type?
+    async function blogClickListener(event: React.MouseEvent<HTMLButtonElement>) {
       event.preventDefault();
       if(showModal == false) {
-        let id = event.target.getAttribute("blog");
+        const target = event.target as HTMLButtonElement
+        let id = target.getAttribute("value");
   
         //Fetch the specified blog here - update selected blog - this will hold the entire blog object
         let response = await fetch(`http://localhost:3001/blogs/${id}`)
