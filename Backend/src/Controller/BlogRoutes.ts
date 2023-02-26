@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import {getAllBlogs, getBlogsByTags, getBlogById} from '../Service/BlogService.js';
+import {getAllBlogs, getBlogsByTags, getBlogById, postBlog} from '../Service/BlogService.js';
 
 
 const router = express.Router();
@@ -15,6 +15,6 @@ router.get('/tags', getBlogsByTags)
 router.get('/:id', getBlogById)
 
 // //This is an internal interface only - used for me to post blogs without having to go directly to DB
-// router.post('/', service.postBlog)
+router.post('/', postBlog)
 
 export const blogRoutes = router;

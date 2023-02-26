@@ -43,3 +43,14 @@ export async function getBlogsByTags (req: Request, res: Response) {
 
     res.status(200).end(JSON.stringify(projectBlogs))
 }
+
+export function postBlog(req: Request, res: Response) {
+    const newBlog: Blog = req.body;
+    new BlogModel(newBlog).save((err, result) => {
+        if(err) {
+            res.end(JSON.stringify(err))
+        } else {
+            res.end(JSON.stringify(result))
+        }
+    })
+}
