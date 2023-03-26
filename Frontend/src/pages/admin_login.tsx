@@ -1,5 +1,5 @@
 import React from 'react'
-import {LoginButton} from '../components/LoginButton'
+import {AdminToolLoginButton} from '../components/AdminToolLoginButton'
 import { config } from '../../config'
 
 type AdminLoginProps = {
@@ -8,7 +8,7 @@ type AdminLoginProps = {
 
 export default function admin_login( props: AdminLoginProps ) {
   return (
-    <LoginButton EMAIL={props.EMAIL} />
+    <AdminToolLoginButton EMAIL={props.EMAIL} />
   )
 }
 

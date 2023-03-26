@@ -6,9 +6,6 @@ import {ProjectModel} from "../Model/project.js"
 import {Project} from "../Types/Project.js"
 
 
-
-console.log(config.DBUSERNAME + " | " + config.DBPASSWORD)
-
 const DBURI = `mongodb+srv://${config.DBUSERNAME}:${config.DBPASSWORD}@homepagecluster.toe2cpr.mongodb.net/?retryWrites=true&w=majority`
 mongoose.connect(DBURI)
     .catch(err => console.log(err))
