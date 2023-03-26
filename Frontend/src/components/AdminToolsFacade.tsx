@@ -13,11 +13,13 @@ function AdminToolsFacade() {
 
     const updateEntryType: ChangeEventHandler = (event: ChangeEvent<HTMLSelectElement>) => {
         let newEntryType: string = event.target.value;
+        setId(null)
         setEntryType(newEntryType);
     }
 
     const updateAddOrUpdate: ChangeEventHandler = (event: ChangeEvent<HTMLSelectElement>) => {
         let newAddOrUpdateSelection: string = event.target.value;
+        setId(null)
         setUpdateOrCreate(newAddOrUpdateSelection);
     }
 
@@ -42,7 +44,7 @@ function AdminToolsFacade() {
             </Form.Group>
             }
             
-            <AdminTools entryType={entryType} updateOrCreate={updateOrCreate} id={id as string}/>
+            <AdminTools entryType={entryType} id={id as string}/>
         </div>
   )
 }
