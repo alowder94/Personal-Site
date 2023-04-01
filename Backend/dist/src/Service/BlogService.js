@@ -23,6 +23,15 @@ export function getAllBlogs(req, res) {
         res.status(200).end(JSON.stringify(result));
     });
 }
+export function getBlogCount() {
+    return __awaiter(this, void 0, void 0, function* () {
+        let blogCount = 0;
+        yield BlogModel.find().then(res => {
+            blogCount = res.length;
+        });
+        return blogCount;
+    });
+}
 //Return a blog based on the user defined Id
 export function getBlogByUserId(req, res) {
     const id = req.params.id;
@@ -57,13 +66,27 @@ export function getBlogsByTags(req, res) {
     });
 }
 export function postBlog(req, res) {
-    const newBlog = req.body;
-    new BlogModel(newBlog).save((err, result) => {
-        if (err) {
-            res.end(JSON.stringify(err));
-        }
-        else {
-            res.end(JSON.stringify(result));
-        }
+    return __awaiter(this, void 0, void 0, function* () {
+        const idNum = (yield getBlogCount()) + 1;
+        const id = idNum.toString();
+        const title = req.body.blogTitle;
+        const snipet = req.body.blogSnipet;
+        const body = req.body.blogBody;
+        const tags = ["test tags"]; //req.body.blogTags;
+        const newBlog = {
+            id: id,
+            title: title,
+            snipet: snipet,
+            body: body,
+            tags: tags
+        };
+        new BlogModel(newBlog).save((err, result) => {
+            if (err) {
+                res.end(JSON.stringify(err));
+            }
+            else {
+                res.end(JSON.stringify(result));
+            }
+        });
     });
 }

@@ -17,11 +17,19 @@ export function getAboutMe(req: Request, res: Response) {
 
 export function getAllBlogs(req: Request, res: Response) {
     BlogModel.find()
-        .then(result => {
-            res.status(200).end(JSON.stringify(result))
-        }
-        )
+    .then(result => {
+        res.status(200).end(JSON.stringify(result))
+    }
+    )
 } 
+
+export async function getBlogCount(): Promise<number>{
+    let blogCount: number = 0;
+    await BlogModel.find().then(res => {
+        blogCount = res.length
+    });
+    return blogCount;
+}
 
 //Return a blog based on the user defined Id
 export function getBlogByUserId(req: Request, res: Response) {
@@ -59,9 +67,25 @@ export async function getBlogsByTags (req: Request, res: Response) {
     res.status(200).end(JSON.stringify(projectBlogs))
 }
 
-export function postBlog(req: Request, res: Response) {
-    const newBlog: Blog = req.body;
-    new BlogModel(newBlog).save((err, result) => {
+export async function postBlog(req: Request, res: Response) {
+
+    const idNum: number = await getBlogCount() + 1;
+
+    const id: string = idNum.toString();
+    const title: string = req.body.blogTitle;
+    const snipet: string = req.body.blogSnipet;
+    const body: string = req.body.blogBody;
+    const tags: string[] = ["test tags"] //req.body.blogTags;
+
+    const newBlog: Blog = {
+        id: id,
+        title: title,
+        snipet: snipet,
+        body: body,
+        tags: tags 
+    }
+
+new BlogModel(newBlog).save((err, result) => {
         if(err) {
             res.end(JSON.stringify(err))
         } else {

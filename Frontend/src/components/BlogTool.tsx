@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { useState } from 'react'
 import Layout from './Layout'
 import { Button, Container, Form } from 'react-bootstrap'
@@ -19,11 +19,45 @@ function BlogTool(props: blogToolProps) {
 //     setBlogTags(newBlogTags);
 //   }
 
-  function submitForm(event: React.MouseEvent<HTMLButtonElement>): void {
+function createBlog(blogTitle: string, blogSnipet: string, blogBody: string, blogTags: string[]): void {
+  const requestBody = {
+    "blogTitle": blogTitle,
+    "blogSnipet": blogSnipet,
+    "blogBody": blogBody,
+    "blogTags": blogTags
+  }
+
+  const headers = {
+    "Content-Type": "application/json"
+  }
+
+  fetch("http://localhost:3001/blogs",
+          {method: "POST",
+          mode: "cors",
+          body: JSON.stringify(requestBody),
+          headers: new Headers(headers)
+          })
+          .then(res => console.log(res.json))
+          .catch(err => console.log(err))
+}  
+
+function updateBlog(id: string, blogTitle: string, blogSnipet: string, blogBody: string, blogTags: string[]): void {
+  console.log(`Blog Updated. id: ${id} | title: ${blogTitle} | snipet: ${blogSnipet} | body: ${blogBody}`)
+}
+
+function submitForm(event: React.MouseEvent<HTMLButtonElement>): void {
     event.preventDefault();
-    //Conditional - if blog is passed then build request and send to update backend - if no blog is passed send to create backend
-    console.log("Form Submitted!");
-    //Test this by pulling values from each field and outputting them in console
+    
+    let blogTitle: HTMLInputElement = document.getElementById("blogTitle") as HTMLInputElement;
+    let blogSnipet: HTMLInputElement = document.getElementById("blogSnipet") as HTMLInputElement;
+    let blogBody: HTMLInputElement = document.getElementById("blogBody") as HTMLInputElement;
+
+    if(props.blog) {
+      let id: string = props.blog.id;
+      updateBlog(id, blogTitle.value, blogSnipet.value, blogBody.value, ["test tags"]); //TODO: Grab tags from tag management component once it is functional
+    } else {
+      createBlog(blogTitle.value, blogSnipet.value, blogBody.value, ["test tags"]); //TODO: Grab tags from the tag management component once it is functional
+    }
   }
 
   return (
