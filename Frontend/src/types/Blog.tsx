@@ -4,5 +4,5 @@ export type Blog = {
     title: string
     snipet: string
     body: string
-    tags: string
+    tags: string[]
 }

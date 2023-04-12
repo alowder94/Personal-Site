@@ -1,8 +1,8 @@
 import React from 'react'
-import { useState } from 'react'
-import Layout from './Layout'
+import { useState, useEffect } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import { Blog } from '../types/Blog'
+import Tags from './Tags'
 
 type blogToolProps = {
     blog?: Blog | null
@@ -10,14 +10,8 @@ type blogToolProps = {
 
 function BlogTool(props: blogToolProps) {
 
-//Find way to manage blog tags -- this below might be a good start but maybe start architecture from scratch to optimize it for this new multi-function component
-//   const [blogTags, setBlogTags] = useState<string[]>([])
-
-//   function addBlogTag(newTag: string): void { //This may need to be reformatted as a clicklistener...but will need to retain this basic functionality
-//     let newBlogTags: string[] = blogTags;
-//     newBlogTags.push(newTag);
-//     setBlogTags(newBlogTags);
-//   }
+  const [blogTags, setBlogTags] = useState<string[]>([])
+  
 
 function createBlog(blogTitle: string, blogSnipet: string, blogBody: string, blogTags: string[]): void {
   const requestBody = {
@@ -77,6 +71,7 @@ function submitForm(event: React.MouseEvent<HTMLButtonElement>): void {
                 <Form.Label>Blog Body</Form.Label>
                 <Form.Control type="text-area" placeholder="Blog Body" defaultValue={props.blog? props.blog.body : ""}/>
               </Form.Group>
+              <Tags tags={props.blog? props.blog.tags : []} updateTags={setBlogTags} />
               {/* Implement feature for adding tags one at a time */}
               <div className="text-center">
                   <Button onClick={submitForm} variant="dark" className='my-2'>Submit</Button>
