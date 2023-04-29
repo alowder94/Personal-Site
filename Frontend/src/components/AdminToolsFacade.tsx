@@ -38,10 +38,11 @@ function AdminToolsFacade() {
                 <option value="create">Create</option>
                 <option value="update">Update</option>
             </Form.Select>
-            {updateOrCreate === 'update' &&
+            {updateOrCreate === 'update' ?
             <Form.Group controlId="projectName">
                 <Form.Control type="input" placeholder="Project or Blog ID" onChange={updateId}/>
             </Form.Group>
+            : null
             }
             
             <AdminTools entryType={entryType} id={id as string}/>

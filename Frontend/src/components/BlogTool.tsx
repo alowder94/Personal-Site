@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import { Blog } from '../types/Blog'
-import Tags from './Tags'
+import TagsTool from './TagsTool'
 
 type blogToolProps = {
     blog?: Blog | null
@@ -10,8 +10,7 @@ type blogToolProps = {
 
 function BlogTool(props: blogToolProps) {
 
-  const [blogTags, setBlogTags] = useState<string[]>([])
-  
+  const [blogTags, setBlogTags] = useState<string[]>(props.blog ? props.blog.tags : [])
 
 function createBlog(blogTitle: string, blogSnipet: string, blogBody: string, blogTags: string[]): void {
   const requestBody = {
@@ -71,8 +70,9 @@ function submitForm(event: React.MouseEvent<HTMLButtonElement>): void {
                 <Form.Label>Blog Body</Form.Label>
                 <Form.Control type="text-area" placeholder="Blog Body" defaultValue={props.blog? props.blog.body : ""}/>
               </Form.Group>
-              <Tags tags={props.blog? props.blog.tags : []} updateTags={setBlogTags} />
-              {/* Implement feature for adding tags one at a time */}
+              <TagsTool tags={props.blog ? props.blog.tags : []} updateTags={setBlogTags} />
+              <p className='text-center display-6'>Tags</p>
+            {blogTags.length > 0? blogTags.map(tag => <p key={tag}>{tag}</p>) : <p>No tags found</p>}
               <div className="text-center">
                   <Button onClick={submitForm} variant="dark" className='my-2'>Submit</Button>
               </div>
